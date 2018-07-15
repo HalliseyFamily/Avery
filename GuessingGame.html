@@ -31,7 +31,6 @@
       <label for="guessField">Enter a guess: </label><input type="text" id="guessField" class="guessField">
       <input type="submit" value="Submit guess" class="guessSubmit">
     </div>
-
     <div class="resultParas">
       <p class="guesses"></p>
       <p class="lastResult"></p>
@@ -40,6 +39,62 @@
 
     <script>
       // Your JavaScript goes here
+	  
+		var guesses = document.querySelector('.guesses');
+		var lastResult = document.querySelector('.lastResult');
+		var lowOrHi = document.querySelector('.lowOrHi');
+		var guessSubmit = document.querySelector('.guessSubmit');
+		var guessField = document.querySelector('.guessField');
+		var guessCount = 1;
+		var resetButton;
+
+	  
+		var number = document.querySelector('.number');
+		let randomNumber = Math.round(Math.random() * 100) + 1;
+		//number.textContent = randomNumber;
+		
+		function endGame()
+		{	
+			guessSubmit.disabled = true;
+			guessField.disabled = true;
+		}
+		
+		function checkGuess()
+		{
+			const guessValue = Number(guessField.value);
+			if(guessValue === randomNumber)
+			{
+				lastResult.textContent = 'Corect!';
+				lastResult.style.backgroundColor = 'green';
+				endGame();
+			}
+			else if (guessValue < randomNumber)
+			{
+				lastResult.textContent = 'higher than ' + guessValue;
+				lastResult.style.backgroundColor = 'red';
+			
+			}
+			else if (guessValue > randomNumber)
+			{
+				lastResult.textContent = 'lower than ' + guessValue;
+				lastResult.style.backgroundColor = 'red';
+			
+			}
+			else
+			{
+				lastResult.textContent = 'uh oh!';
+				lastResult.style.backgroundColor = 'yellow';
+			}
+			if(guessCount > 9)
+			{
+				endGame();
+			}
+			guesses.textContent = 'guesses remaining ' + (10 - guessCount);
+			guessCount++;
+			guessField.value = '';
+			guessField.focus();
+		}
+		guessSubmit.addEventListener('click', checkGuess);
 
 	  </script>
   </body>
