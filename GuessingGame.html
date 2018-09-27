@@ -47,6 +47,9 @@
 		var guessField = document.querySelector('.guessField');
 		var guessCount = 1;
 		var resetButton;
+		
+		var correctSound = new Audio('tada.wav');
+		var incorrectSound = new Audio('Windows Hardware Fail.wav');
 
 	  
 		var number = document.querySelector('.number');
@@ -66,18 +69,21 @@
 			{
 				lastResult.textContent = 'Corect!';
 				lastResult.style.backgroundColor = 'green';
+				correctSound.play();
 				endGame();
 			}
 			else if (guessValue < randomNumber)
 			{
 				lastResult.textContent = 'higher than ' + guessValue;
 				lastResult.style.backgroundColor = 'red';
+				incorrectSound.play();
 			
 			}
 			else if (guessValue > randomNumber)
 			{
 				lastResult.textContent = 'lower than ' + guessValue;
-				lastResult.style.backgroundColor = 'red';
+				lastResult.style.backgroundColor = 'blue';
+				incorrectSound.play();
 			
 			}
 			else
